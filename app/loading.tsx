@@ -13,6 +13,7 @@ const Loading = () => {
       }}
     >
       <Image
+        loading="eager"
         src={loader}
         width={150}
         height={150}
