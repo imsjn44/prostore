@@ -22,3 +22,15 @@ export const insertProductSchema = z.object({
 });
 
 // Make sure price is formatted with two decimal places
+
+//Schema for signing in form
+
+export const signInFormSchema = z.object({
+  email: z
+    .string() // The email field must be a string
+    .email("Invalid email address") // Must be a valid email format
+    .min(3, "Email must be at least 3 characters"), // Minimum length 3
+  password: z
+    .string() // The password field must be a string
+    .min(3, "Password must be at least 3 characters"), // Minimum length 3
+});

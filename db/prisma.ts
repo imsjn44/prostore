@@ -11,7 +11,6 @@ neonConfig.webSocketConstructor = ws;
 
 const connectionString = process.env.DATABASE_URL!;
 
-// ✅ FIX: pass config instead of pool
 const adapter = new PrismaNeon({ connectionString });
 
 export const prisma = new PrismaClient({ adapter }).$extends({
