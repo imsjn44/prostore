@@ -6,6 +6,9 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/db/prisma";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+
 export const config = {
   pages: {
     signIn: "/sign-in",
@@ -55,12 +58,65 @@ export const config = {
     }),
   ],
   callbacks: {
-    async session({ session, user, trigger, token }: any) {
-      session.user.id = token.sub;
-      if (trigger === "update") {
-        session.user.name = user.name;
+    async jwt({ token, user, trigger, session }: any) {
+      // Assign user fields to token
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+
+        // If user has no name, use email as their default name
+        if (user.name === "NO_NAME") {
+          token.name = user.email!.split("@")[0];
+
+          // Update the user in the database with the new name
+          await prisma.user.update({
+            where: { id: user.id },
+            data: { name: token.name },
+          });
+        }
+      }
+
+      // Handle session updates (e.g., name change)
+      if (session?.user.name && trigger === "update") {
+        token.name = session.user.name;
+      }
+
+      return token;
+    },
+    async session({ session, trigger, token }: any) {
+      //  Map the token data to the session object
+      session.user.id = token.id;
+      session.user.name = token.name; // 👈 Add this line
+      session.user.role = token.role; // 👈 Add this line
+      if (trigger === "update" && token.name) {
+        session.user.name = token.name;
       }
       return session;
+    },
+    authorized({ request, auth }: any) {
+      // Check for cart cookie
+      if (!request.cookies.get("sessionCartId")) {
+        // Generate cart cookie
+        const sessionCartId = crypto.randomUUID();
+
+        // Clone the request headers
+        const newRequestHeaders = new Headers(request.headers);
+
+        // Create a new response and add the new headers
+        const response = NextResponse.next({
+          request: {
+            headers: newRequestHeaders,
+          },
+        });
+
+        // Set the newly generated sessionCartId in the response cookies
+        response.cookies.set("sessionCartId", sessionCartId);
+
+        // Return the response with the sessionCartId set
+        return response;
+      } else {
+        return true;
+      }
     },
   },
 } satisfies NextAuthConfig;
