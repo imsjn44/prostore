@@ -27,14 +27,8 @@ export const round2 = (value: number | string) => {
 };
 
 export function formatError(error: any): string {
-  if (error.name === "ZodError") {
-    // Handle Zod error
-    const fieldErrors = Object.keys(error.errors).map((field) => {
-      const message = error.errors[field].message;
-      return typeof message === "string" ? message : JSON.stringify(message);
-    });
-
-    return fieldErrors.join(". ");
+  if (error?.name === "ZodError") {
+    return error.issues.map((issue: any) => issue.message).join(", ");
   } else if (
     error.name === "PrismaClientKnownRequestError" &&
     error.code === "P2002"
