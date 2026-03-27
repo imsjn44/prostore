@@ -3,7 +3,7 @@ import CheckoutSteps from "@/components/shared/checkout-steps";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateUserPaymentMethod } from "@/lib/actions/users.action";
+import { updateUserPaymentMethod } from "@/lib/actions/user.actions";
 import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHODS } from "@/lib/constants";
 import { paymentMethodSchema } from "@/lib/validator";
 import { zodResolver } from "@hookform/resolvers/zod";

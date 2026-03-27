@@ -2,7 +2,7 @@ import { getMyCart } from "@/lib/actions/cart.actions";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
-import { getUserById } from "@/lib/actions/users.action";
+import { getUserById } from "@/lib/actions/user.actions";
 import ShippingAddressForm from "./shipping-address-form";
 import { ShippingAddress } from "@/.next/types";
 import CheckoutSteps from "@/components/shared/checkout-steps";

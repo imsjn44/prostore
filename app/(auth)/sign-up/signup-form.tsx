@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
-import { signUp } from "@/lib/actions/users.action";
+import { signUp } from "@/lib/actions/user.actions";
 import { signUpDefaultValues } from "@/lib/constants";
 
 const SignUpForm = () => {

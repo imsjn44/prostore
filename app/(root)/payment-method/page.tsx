@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { auth } from "@/auth";
-import { getUserById } from "@/lib/actions/users.action";
+import { getUserById } from "@/lib/actions/user.actions";
 import PaymentMethodForm from "./payment-method-form";
 import { PaymentMethod } from "@/.next/types";
 

@@ -18,7 +18,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Loader } from "lucide-react";
 import { toast } from "sonner";
-import { updateUserAddress } from "@/lib/actions/users.action";
+import { updateUserAddress } from "@/lib/actions/user.actions";
 const ShippingAddressForm = ({
   address,
 }: {

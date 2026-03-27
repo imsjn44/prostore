@@ -36,7 +36,7 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {cart!.items.map((item) => (
+            {cart?.items?.map((item) => (
               <TableRow key={item.slug}>
                 <TableCell>
                   <Link
@@ -106,9 +106,9 @@ const CartTable = ({ cart }: { cart?: Cart }) => {
       <Card>
         <CardContent className="p-4 gap-4">
           <div className="pb-3 text-xl">
-            Subtotal ({cart!.items.reduce((a, c) => a + c.qty, 0)}):
+            Subtotal ({cart?.items?.reduce((a, c) => a + c.qty, 0)}):
             <span className="font-bold mr-1">
-              {formatCurrency(cart!.itemsPrice)}
+              {formatCurrency(cart!?.itemsPrice)}
             </span>
           </div>
           <Button
