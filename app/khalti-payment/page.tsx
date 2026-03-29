@@ -9,15 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { toast } from "sonner";
 import { formatError } from "@/lib/utils";
+import { toast } from "sonner";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import Script from "next/script";
 import { useSearchParams } from "next/navigation";
-
 export default function KhaltiPayment() {
   const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
+  const orderId = searchParams.get("orderId"); // Extracts the ID from the URL
 
   const [amount, setAmount] = useState("");
   const [productName, setProductName] = useState("");
@@ -26,121 +26,114 @@ export default function KhaltiPayment() {
 
   useEffect(() => {
     const fetchOrderData = async () => {
-      if (!orderId) return;
+      if (!orderId) return; // Don't fetch if no ID is present
 
       try {
+        // Pass the actual orderId to your backend
         const response = await fetch(`/api/autofilldata/${orderId}`);
-        if (!response.ok) throw new Error("Failed to fetch order data");
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
 
         const data = await response.json();
+        console.log(data);
 
-        // Ensure we are setting strings for the input fields
-        setAmount(data.totalPrice.toString());
+        // Populate the form with real data from your DB
+        setAmount(data.totalPrice);
         setProductName(data.productName);
-        setTransactionId(data.orderId);
+        setTransactionId(data.orderId); // Using orderId as the unique transaction UUID
 
         toast.success("Order data loaded");
       } catch (error) {
-        console.error("Fetch error:", error);
+        console.log("Error fetching data:", formatError(error));
         toast.error("Failed to load order details.");
       }
     };
 
     fetchOrderData();
-  }, [orderId]);
-
+  }, [orderId]); // Re-run if orderId changes
   const handlePayment = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
-      // 1. Convert NPR to Paisa (Integer)
-      const amountInPaisa = Math.round(parseFloat(amount) * 100);
-
-      if (isNaN(amountInPaisa) || amountInPaisa <= 0) {
-        throw new Error("Invalid amount");
-      }
-
       const response = await fetch("/api/checkout-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           method: "khalti",
-          amount: amountInPaisa, // Sending as integer paisa
-          purchase_order_id: transactionId, // Use Khalti's expected naming
-          purchase_order_name: productName,
-          return_url: `${window.location.origin}/api/payment-verify`, // Standard return path
-          website_url: window.location.origin,
+          amount,
+          productName,
+          transactionId,
         }),
       });
-
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.message || "Payment initiation failed");
+        throw new Error("Payment initiation failed");
+      }
+      const data = await response.json();
+      if (!data.khaltiPaymentUrl) {
+        throw new Error("Khalti payment URL not received");
       }
 
-      if (data.khaltiPaymentUrl) {
-        // Redirect to Khalti's hosted payment page
-        window.location.href = data.khaltiPaymentUrl;
-      } else {
-        throw new Error("No payment URL received from server");
-      }
+      window.location.href = data.khaltiPaymentUrl;
     } catch (error) {
       console.error("Payment error:", error);
-      toast.error(error instanceof Error ? error.message : "Payment failed");
+      alert("Payment initiation failed. Please try again.");
     } finally {
       setIsLoading(false);
     }
   };
-
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <Card className="w-full max-w-md mx-4">
-        <CardHeader>
-          <CardTitle>Khalti Payment</CardTitle>
-          <CardDescription>Review your order details</CardDescription>
-        </CardHeader>
-        <form onSubmit={handlePayment}>
-          <CardContent className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="amount">Amount (NPR)</Label>
-              <Input
-                id="amount"
-                type="number"
-                step="0.01"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="productName">Product Name</Label>
-              <Input
-                id="productName"
-                value={productName}
-                onChange={(e) => setProductName(e.target.value)}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="transactionId">Order ID</Label>
-              <Input
-                id="transactionId"
-                value={transactionId}
-                onChange={(e) => setTransactionId(e.target.value)}
-                required
-                readOnly // Usually you don't want users changing the Order ID
-              />
-            </div>
-          </CardContent>
-          <CardFooter>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? "Redirecting to Khalti..." : "Pay with Khalti"}
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
-    </div>
+    <>
+      <Script
+        src="https://khalti.s3.ap-south-1.amazonaws.com/KPG/dist/2020.12.22.0.0.0/khalti-checkout.iffe.js"
+        strategy="lazyOnload"
+      />
+      <div className="flex justify-center items-center min-h-screen bg-gray-100">
+        <Card className="w-full max-w-md mx-4">
+          <CardHeader>
+            <CardTitle>Khalti Payment</CardTitle>
+            <CardDescription>Enter payment details for Khalti</CardDescription>
+          </CardHeader>
+          <form onSubmit={handlePayment}>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="amount">Amount (NPR)</Label>
+                <Input
+                  id="amount"
+                  type="number"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="productName">Product Name</Label>
+                <Input
+                  id="productName"
+                  value={productName}
+                  onChange={(e) => setProductName(e.target.value)}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="transactionId">Transaction ID</Label>
+                <Input
+                  id="transactionId"
+                  value={transactionId}
+                  onChange={(e) => setTransactionId(e.target.value)}
+                  required
+                />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button type="submit" className="w-full" disabled={isLoading}>
+                {isLoading ? "Processing..." : "Pay with Khalti"}
+              </Button>
+            </CardFooter>
+          </form>
+        </Card>
+      </div>
+    </>
   );
 }

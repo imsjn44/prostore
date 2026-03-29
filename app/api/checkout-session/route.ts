@@ -4,6 +4,7 @@ import { generateEsewaSignature } from "@/lib/generateEsewaSignature";
 import { PaymentMethod, PaymentRequestData } from "@/lib/constants";
 import { prisma } from "@/db/prisma";
 import { PaymentStatus } from "@/lib/constants";
+import { auth } from "@/auth";
 
 function validateEnvironmentVariables() {
   const requiredEnvVars = [
@@ -19,6 +20,17 @@ function validateEnvironmentVariables() {
 }
 
 export async function POST(req: Request) {
+  const session = await auth();
+
+  // 1. Check if user is authenticated
+  if (!session || !session.user) {
+    return NextResponse.json(
+      { error: "Unauthorized. Please log in to complete payment." },
+      { status: 401 },
+    );
+  }
+
+  const user = session.user; // Contains name, email, etc.
   console.log("Received POST request to /api/checkout-session");
   try {
     validateEnvironmentVariables();
@@ -66,6 +78,44 @@ export async function POST(req: Request) {
             tax_amount: Number(esewaConfig.tax_amount),
             total_amount: Number(esewaConfig.total_amount),
           },
+        });
+      }
+
+      case "khalti": {
+        console.log("Initiating Khalti payment");
+        const khaltiConfig = {
+          return_url: `${process.env.NEXT_PUBLIC_SERVER_URL}/success?method=khalti`,
+          website_url: process.env.NEXT_PUBLIC_SERVER_URL!,
+          amount: Math.round(parseFloat(amount) * 100),
+          purchase_order_id: transactionId,
+          purchase_order_name: productName,
+          customer_info: {
+            name: user?.name,
+            email: user?.email,
+          },
+        };
+        const response = await fetch(
+          "https://a.khalti.com/api/v2/epayment/initiate/",
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Key ${process.env.NEXT_PUBLIC_KHALTI_SECRET_KEY}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(khaltiConfig),
+          },
+        );
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error("Khalti API Error:", errorData);
+          throw new Error(
+            `Khalti payment initiation failed: ${JSON.stringify(errorData)}`,
+          );
+        }
+        const khaltiResponse = await response.json();
+        console.log("Khalti payment initiated:", khaltiResponse);
+        return NextResponse.json({
+          khaltiPaymentUrl: khaltiResponse.payment_url,
         });
       }
 
