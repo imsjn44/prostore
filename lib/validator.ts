@@ -5,8 +5,10 @@ export const currency = z
     "Price must have exactly two decimal places (e.g., 49.99)",
   );
 import { z } from "zod";
+import { PaymentMethod } from "@/lib/constants";
+import { PAYMENT_METHODS } from "@/lib/constants";
 import { formatNumberWithDecimal } from "./utils";
-import { PAYMENT_METHODS } from "./constants";
+// import { PAYMENT_METHODS } from "./constants";
 
 // Schema for inserting a product
 export const insertProductSchema = z.object({
@@ -85,14 +87,18 @@ export const shippingAddressSchema = z.object({
   lng: z.number().optional(),
 });
 
-export const paymentMethodSchema = z
-  .object({
-    type: z.string().min(1, "Payment method is required"),
-  })
-  .refine((data) => PAYMENT_METHODS.includes(data.type), {
-    path: ["type"],
-    message: "Invalid payment method",
-  });
+// export const paymentMethodSchema = z
+//   .object({
+//     type: z.string().min(1, "Payment method is required"),
+//   })
+//   .refine((data) => PAYMENT_METHODS.includes(data.type), {
+//     path: ["type"],
+//     message: "Invalid payment method",
+//   });
+
+// export const paymentMethodSchema = z.object({
+//   type: z.enum(PaymentMethod),
+// });
 
 // Insert Order Schema
 export const insertOrderSchema = z.object({
@@ -101,9 +107,11 @@ export const insertOrderSchema = z.object({
   shippingPrice: currency,
   taxPrice: currency,
   totalPrice: currency,
-  paymentMethod: z.string().refine((data) => PAYMENT_METHODS.includes(data), {
-    message: "Invalid payment method",
-  }),
+  paymentMethod: z
+    .string()
+    .refine((data) => PAYMENT_METHODS.includes(data as PaymentMethod), {
+      message: "Invalid payment method",
+    }),
   shippingAddress: shippingAddressSchema,
 });
 

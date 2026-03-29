@@ -128,3 +128,35 @@ model OrderItem {
 
   @@id([orderId, productId], map: "orderItems_orderId_productId_pk")
 }
+
+model Payment {
+  id                   String        @id @default(cuid())
+  userId               String
+  amount               Float
+  method               PaymentMethod
+  paymentStatus        PaymentStatus @default(PENDING)
+  esewaTransactionUuid String? // only for eSewa
+  esewaRefId           String? // only for eSewa
+  khaltiPidx           String? // only for Khalti
+  stripePaymentIntent  String? // only for Stripe
+  codConfirmed         Boolean? // only for COD
+  createdAt            DateTime      @default(now())
+  updatedAt            DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+/// Enum for payment method
+enum PaymentMethod {
+  ESEWA
+  KHALTI
+  STRIPE
+  COD
+}
+
+/// Enum for payment status
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}

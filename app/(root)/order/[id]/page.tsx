@@ -18,13 +18,19 @@ const OrderDetailsPage = async (props: {
 
   return (
     <OrderDetailsForm
-      order={
-        {
-          ...order,
+      order={{
+        ...order,
+        itemsPrice: order.itemsPrice.toString(),
+        shippingPrice: order.shippingPrice.toString(),
+        taxPrice: order.taxPrice.toString(),
+        totalPrice: order.totalPrice.toString(),
+        orderItems: order.orderItems.map((item: any) => ({
+          ...item,
+          price: item.price.toString(),
+        })),
 
-          shippingAddress: order.shippingAddress as ShippingAddress,
-        } as any
-      }
+        shippingAddress: order.shippingAddress as ShippingAddress,
+      }}
     />
   );
 };

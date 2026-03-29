@@ -3,7 +3,6 @@
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { signIn, signOut } from "@/auth";
 import {
-  paymentMethodSchema,
   shippingAddressSchema,
   signInFormSchema,
   signUpFormSchema,
@@ -124,7 +123,7 @@ export async function updateUserAddress(data: ShippingAddress) {
 }
 
 // Update user's payment method
-export async function updateUserPaymentMethod(data: PaymentMethod) {
+export async function updateUserPaymentMethod(paymentMethod: PaymentMethod) {
   try {
     const session = await auth();
     const currentUser = await prisma.user.findFirst({
@@ -132,16 +131,13 @@ export async function updateUserPaymentMethod(data: PaymentMethod) {
     });
     if (!currentUser) throw new Error("User not found");
 
-    const paymentMethod = paymentMethodSchema.parse(data);
+    console.log(paymentMethod);
     await prisma.user.update({
       where: { id: currentUser.id },
-      data: { paymentMethod: paymentMethod.type },
+      data: { paymentMethod }, // save enum directly
     });
 
-    return {
-      success: true,
-      message: "User updated successfully",
-    };
+    return { success: true, message: "User updated successfully" };
   } catch (error) {
     return { success: false, message: formatError(error) };
   }

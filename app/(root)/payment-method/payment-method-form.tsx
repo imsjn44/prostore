@@ -1,59 +1,56 @@
 "use client";
+
+import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import { PAYMENT_METHODS } from "@/lib/constants";
+
 import CheckoutSteps from "@/components/shared/checkout-steps";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { updateUserPaymentMethod } from "@/lib/actions/user.actions";
-import { DEFAULT_PAYMENT_METHOD, PAYMENT_METHODS } from "@/lib/constants";
-import { paymentMethodSchema } from "@/lib/validator";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowRight, Loader } from "lucide-react";
-import { useTransition } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { z } from "zod";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
-import {
-  Field,
-  FieldDescription,
-  FieldLabel,
-  FieldLegend,
-  FieldSet,
-} from "@/components/ui/field";
-import { PaymentMethod } from "@/.next/types";
+import { FieldSet, FieldLegend, FieldDescription } from "@/components/ui/field";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Loader, ArrowRight } from "lucide-react";
+
+import { updateUserPaymentMethod } from "@/lib/actions/user.actions";
+import { DEFAULT_PAYMENT_METHOD, PaymentMethod } from "@/lib/constants";
+// import { paymentMethodSchema } from "@/lib/validator";
+
+interface PaymentMethodFormProps {
+  preferredPaymentMethod: PaymentMethod | null;
+}
 
 const PaymentMethodForm = ({
   preferredPaymentMethod,
-}: {
-  preferredPaymentMethod: string | null;
-}) => {
+}: PaymentMethodFormProps) => {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof paymentMethodSchema>>({
-    resolver: zodResolver(paymentMethodSchema),
+  const form = useForm<{ type: PaymentMethod }>({
     defaultValues: {
-      type: preferredPaymentMethod || DEFAULT_PAYMENT_METHOD,
+      type: preferredPaymentMethod || (DEFAULT_PAYMENT_METHOD as PaymentMethod),
     },
   });
+  const selectedMethod = form.watch("type");
 
-  const [isPending, startTransition] = useTransition();
-  const onSubmit: SubmitHandler<z.infer<typeof paymentMethodSchema>> = async (
-    values: PaymentMethod,
-  ) => {
+  const onSubmit: SubmitHandler<{ type: PaymentMethod }> = async (values) => {
     startTransition(async () => {
-      console.log(values);
-      const res = await updateUserPaymentMethod(values);
-      console.log(res);
+      console.log("Submitting payment method:", values.type);
+
+      const res = await updateUserPaymentMethod(values.type as PaymentMethod);
+      console.log("API RESPONSE:", res); // 👈 ADD THIS
       if (!res.success) {
-        toast(res.message, {
-          description: "Error submitting!",
-        });
+        toast(res.message, { description: "Error submitting!" });
         return;
       }
 
       router.push("/place-order");
     });
   };
+
   return (
     <>
       <CheckoutSteps current={2} />
@@ -64,24 +61,22 @@ const PaymentMethodForm = ({
           <FieldDescription>
             Choose your preferred payment method to continue.
           </FieldDescription>
+
           <RadioGroup
-            defaultValue={DEFAULT_PAYMENT_METHOD}
+            value={form.watch("type")}
+            onValueChange={(val) => form.setValue("type", val as PaymentMethod)}
             className="flex flex-col gap-2"
           >
             {PAYMENT_METHODS.map((method, index) => (
-              <div key={index} className="flex items-center space-x-2 ">
-                <RadioGroupItem
-                  value={method}
-                  className="cursor-pointer"
-                  id={`method-${index}`}
-                />
-                <Label htmlFor={`option-${index}`}>{method}</Label>
+              <div key={index} className="flex items-center space-x-2">
+                <RadioGroupItem value={method} id={`method-${index}`} />
+                <Label htmlFor={`method-${index}`}>{method}</Label>
               </div>
             ))}
           </RadioGroup>
         </FieldSet>
 
-        <div className="flex gap-2 mt-5 ">
+        <div className="flex gap-2 mt-5">
           <Button className="cursor-pointer" type="submit" disabled={isPending}>
             {isPending ? (
               <Loader className="animate-spin w-4 h-4" />
