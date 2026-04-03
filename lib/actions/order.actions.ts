@@ -9,6 +9,7 @@ import { prisma } from "@/db/prisma";
 import { CartItem } from "@/.next/types";
 import { insertOrderSchema } from "../validator";
 import { convertToJSObject } from "../utils";
+import { PAGE_SIZE } from "../constants";
 // Create Order
 export const createOrder = async () => {
   try {
@@ -110,4 +111,33 @@ export async function getOrderById(orderId: string) {
   console.log(data);
 
   return convertToJSObject(data);
+}
+//get my orders
+
+export async function getMyOrders({
+  limit = PAGE_SIZE,
+  page,
+}: {
+  limit?: number;
+  page: number;
+}) {
+  const session = await auth();
+  if (!session) throw new Error("User not authenticated");
+
+  const data = await prisma.order.findMany({
+    where: { userId: session?.user?.id! },
+    orderBy: { createdAt: "desc" },
+    take: limit,
+    skip: (page - 1) * limit,
+  });
+
+  const dataCount = await prisma.order.count({
+    where: { userId: session?.user?.id! },
+  });
+
+  return {
+    dataCount,
+    data,
+    totalPages: Math.ceil(dataCount / limit),
+  };
 }

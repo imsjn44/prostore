@@ -83,3 +83,5 @@ export type Order = z.infer<typeof insertOrderSchema> & {
   orderItems: OrderItem[];
   user: { name: string; email: string };
 };
+
+export const PAGE_SIZE = Number(process.env.PAGE_SIZE) || 10;
