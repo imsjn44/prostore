@@ -113,6 +113,10 @@ export const config = {
       if (trigger === "update" && token.name) {
         session.user.name = token.name;
       }
+
+      if (session?.user.name && trigger === "update") {
+        token.name = session.user.name;
+      }
       return session;
     },
     authorized({ request, auth }: any) {
