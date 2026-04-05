@@ -2,6 +2,14 @@
 import { formatId } from "@/lib/utils";
 import { Order } from "@/.next/types";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "sonner";
+
+import {
+  updateDelivery,
+  updateOrderToPaidByCOD,
+} from "@/lib/actions/order.actions";
+
+import { useTransition } from "react";
 
 import { Badge } from "@/components/ui/badge";
 import { formatDateTime } from "@/lib/utils";
@@ -19,7 +27,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { redirect } from "next/navigation";
-const OrderDetailsForm = ({ order }: { order: Order }) => {
+const OrderDetailsForm = ({
+  order,
+  isAdmin,
+}: {
+  order: Order;
+  isAdmin: boolean;
+}) => {
   const {
     shippingAddress,
     orderItems,
@@ -35,6 +49,45 @@ const OrderDetailsForm = ({ order }: { order: Order }) => {
   } = order;
 
   const router = useRouter();
+
+  const MarkAsPaidButton = () => {
+    const [isPending, startTransition] = useTransition();
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateOrderToPaidByCOD(order.id);
+            toast("Marked as paid successsfully", {
+              description: res.message,
+            });
+          })
+        }
+      >
+        {isPending ? "Processing" : "Mark as Paid"}
+      </Button>
+    );
+  };
+  const MarkAsDeliveredButton = () => {
+    const [isPending, startTransition] = useTransition();
+    return (
+      <Button
+        type="button"
+        disabled={isPending}
+        onClick={() =>
+          startTransition(async () => {
+            const res = await updateDelivery(order.id);
+            toast("Marked as delivered successsfully", {
+              description: res.message,
+            });
+          })
+        }
+      >
+        {isPending ? "Processing" : "Mark as Delivered"}
+      </Button>
+    );
+  };
   return (
     <>
       <h1 className="py-4 text-2xl"> Order {formatId(order.id)}</h1>
@@ -153,6 +206,12 @@ const OrderDetailsForm = ({ order }: { order: Order }) => {
                     Pay with Khalti
                   </Button>
                 )}
+
+                {isAdmin && !isPaid && paymentMethod === "cashondelivery" && (
+                  <MarkAsPaidButton />
+                )}
+
+                {isAdmin && isPaid && !isDelivered && <MarkAsDeliveredButton />}
               </CardContent>
             </Card>
           </div>

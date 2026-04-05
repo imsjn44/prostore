@@ -2,11 +2,13 @@ import { notFound } from "next/navigation";
 import { getOrderById } from "@/lib/actions/order.actions";
 import { ShippingAddress } from "@/.next/types";
 import OrderDetailsForm from "./order-details-form";
+import { auth } from "@/auth";
 const OrderDetailsPage = async (props: {
   params: Promise<{
     id: string;
   }>;
 }) => {
+  const session = await auth();
   const params = await props.params;
 
   const { id } = params;
@@ -14,7 +16,7 @@ const OrderDetailsPage = async (props: {
   const order = await getOrderById(id);
   console.log(typeof order?.itemsPrice);
   if (!order) notFound();
-  console.log(order);
+  // console.log(order);
 
   return (
     <OrderDetailsForm
@@ -31,6 +33,7 @@ const OrderDetailsPage = async (props: {
 
         shippingAddress: order.shippingAddress as ShippingAddress,
       }}
+      isAdmin={session?.user?.role === "admin" || false}
     />
   );
 };
