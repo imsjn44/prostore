@@ -1,6 +1,6 @@
 "use client";
 import { formatId } from "@/lib/utils";
-import { Order } from "@/.next/types";
+import { Order } from "@/lib/constants";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "sonner";
 
