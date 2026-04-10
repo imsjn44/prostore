@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getOrderById } from "@/lib/actions/order.actions";
-import { ShippingAddress } from "@/.next/types";
+import { ShippingAddress } from "@/lib/constants";
 import OrderDetailsForm from "./order-details-form";
 import { auth } from "@/auth";
 const OrderDetailsPage = async (props: {
