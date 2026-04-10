@@ -19,7 +19,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { Cart } from "@/.next/types";
+import { Cart } from "@/lib/constants";
 
 const CartTable = ({ cart }: { cart?: Cart }) => {
   const router = useRouter();
