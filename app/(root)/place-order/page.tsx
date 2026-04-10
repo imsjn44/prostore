@@ -1,6 +1,6 @@
 import { getMyCart } from "@/lib/actions/cart.actions";
 import { getUserById } from "@/lib/actions/user.actions";
-import { ShippingAddress } from "@/.next/types";
+import { ShippingAddress } from "@/lib/constants";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
