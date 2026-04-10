@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { CartItem, Cart } from "@/.next/types";
+import { CartItem, Cart } from "@/lib/constants";
 import { Plus, Minus, Loader } from "lucide-react";
 import { addItemToCart, removeItemFromCart } from "@/lib/actions/cart.actions";
 import { useTransition } from "react";

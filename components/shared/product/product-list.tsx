@@ -1,4 +1,4 @@
-import { Product } from "@/.next/types";
+import { Product } from "@/lib/constants";
 import ProductCard from "./product-card";
 
 const ProductList = ({

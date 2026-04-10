@@ -1,5 +1,5 @@
 "use client";
-import { ShippingAddress } from "@/.next/types";
+import { ShippingAddress } from "@/lib/constants";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";

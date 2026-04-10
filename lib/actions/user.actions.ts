@@ -9,7 +9,7 @@ import {
 } from "../validator";
 import { hashSync } from "bcrypt-ts-edge";
 import { prisma } from "@/db/prisma";
-import { PaymentMethod, ShippingAddress } from "@/.next/types";
+import { PaymentMethod, ShippingAddress } from "@/lib/constants";
 import { auth } from "@/auth";
 import { formatError } from "../utils";
 import { success } from "zod";
