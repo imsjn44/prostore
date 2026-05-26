@@ -24,36 +24,36 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 ## Screenshots
 
 ### Homepage
-<p align="center>
+<p align="center">
   <img width="1871" height="873" alt="Screenshot 2026-05-26 200402" src="https://github.com/user-attachments/assets/697d2951-c9e3-4af7-84f2-6cd71d90eef6" />
 
 </p>
 ### Product Catalog
-<p align="center>
+<p align="center">
   <img width="1860" height="871" alt="Screenshot 2026-05-26 200426" src="https://github.com/user-attachments/assets/68566435-aec0-4673-ad12-34da083d5fa5" />
 
 </p>
 
 ### Shopping Cart
-<p align="center>
+<p align="center">
   <img width="1900" height="411" alt="Screenshot 2026-05-26 200502" src="https://github.com/user-attachments/assets/3d0b2108-515c-4c42-a7be-b7d219886e01" />
 
 </p>
 
 ### Shipping Address
 
-<p align="center>
+<p align="center">
   <img width="1907" height="753" alt="Screenshot 2026-05-26 200517" src="https://github.com/user-attachments/assets/8b9b48f3-9e8c-40c7-b944-af459872ef29" />
 </p>
 
 ###  Choose Payment Method
-<p align="center>
+<p align="center">
   <img width="1915" height="593" alt="Screenshot 2026-05-26 200601" src="https://github.com/user-attachments/assets/6e3f58c9-fd09-4fd8-8386-bf8402c0f3f4" />
 </p>
 
 
 ### Place Order
-<p align="center>
+<p align="center">
   <img width="1877" height="840" alt="Screenshot 2026-05-26 200635" src="https://github.com/user-attachments/assets/cb2db621-55cd-40b4-bd92-15c6db2aa90b" />
 
 </p>
@@ -61,7 +61,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 
 ###Pay with eSewa
 
-<p align="center>
+<p align="center">
 
 <img width="1866" height="853" alt="Screenshot 2026-05-26 200655" src="https://github.com/user-attachments/assets/a2760844-4ff6-41ef-aec5-4c2a18cc4a7e" />
   <img width="558" height="386" alt="Screenshot 2026-05-26 200706" src="https://github.com/user-attachments/assets/2c6cf3fe-5b81-4faa-9d9c-38ec559f1433" />
