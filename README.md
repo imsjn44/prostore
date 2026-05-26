@@ -24,6 +24,14 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 
 ## Screenshots
 ---
+### Sign Up and Login
+<p align="center">
+<img width="587" height="622" alt="Screenshot 2026-05-26 200238" src="https://github.com/user-attachments/assets/db185dea-eeee-4aa3-abd4-40c71f9a3165" />
+<img width="575" height="807" alt="Screenshot 2026-05-26 224011" src="https://github.com/user-attachments/assets/dd05e961-f12b-4d5b-b1d6-d419cb496d88" />
+</p>
+
+---
+---
 ### Homepage
 <p align="center">
   <img width="1871" height="873" alt="Screenshot 2026-05-26 200402" src="https://github.com/user-attachments/assets/697d2951-c9e3-4af7-84f2-6cd71d90eef6" />
