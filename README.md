@@ -73,10 +73,10 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 <p align="center">
 
 <img width="1866" height="853" alt="Screenshot 2026-05-26 200655" src="https://github.com/user-attachments/assets/a2760844-4ff6-41ef-aec5-4c2a18cc4a7e" />
-  <img width="558" height="386" alt="Screenshot 2026-05-26 200706" src="https://github.com/user-attachments/assets/2c6cf3fe-5b81-4faa-9d9c-38ec559f1433"   style="margin-right: 20px;"/>
-<img width="1868" height="861" alt="Screenshot 2026-05-26 200721" src="https://github.com/user-attachments/assets/cfec9232-d6de-4c7f-a508-17c723fd71fd"   style="margin-right: 20px;"/>
-<img width="1262" height="687" alt="Screenshot 2026-05-26 200909" src="https://github.com/user-attachments/assets/612826d2-9fa0-4a12-9907-59a2b2892b17"  style="margin-right: 20px;" />
-<img width="772" height="570" alt="Screenshot 2026-05-26 200934" src="https://github.com/user-attachments/assets/d26c1f50-4086-4542-a9fa-1d1cc5c31cfc"   style="margin-right: 20px;"/>
+  <img width="558" height="386" alt="Screenshot 2026-05-26 200706" src="https://github.com/user-attachments/assets/2c6cf3fe-5b81-4faa-9d9c-38ec559f1433"   style="margin-top: 20px;"/>
+<img width="1868" height="861" alt="Screenshot 2026-05-26 200721" src="https://github.com/user-attachments/assets/cfec9232-d6de-4c7f-a508-17c723fd71fd"   style="margin-top: 20px;"/>
+<img width="1262" height="687" alt="Screenshot 2026-05-26 200909" src="https://github.com/user-attachments/assets/612826d2-9fa0-4a12-9907-59a2b2892b17"  style="margin-top: 20px;" />
+<img width="772" height="570" alt="Screenshot 2026-05-26 200934" src="https://github.com/user-attachments/assets/d26c1f50-4086-4542-a9fa-1d1cc5c31cfc"   style="margin-top: 20px;"/>
 
 </p>
 
