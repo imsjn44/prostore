@@ -16,7 +16,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14+, React, TypeScript, CSS
+- **Frontend**: Next.js 14+, React, TypeScript, TailwindCSS
 - **Backend**: Next.js API Routes
 - **Database**: PostgreSQL with Prisma ORM
 - **Language Composition**: TypeScript (93.7%), JavaScript (3.5%), TailwindCSS (2.8%)
@@ -28,6 +28,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
   <img width="1871" height="873" alt="Screenshot 2026-05-26 200402" src="https://github.com/user-attachments/assets/697d2951-c9e3-4af7-84f2-6cd71d90eef6" />
 
 </p>
+---
 ### Product Catalog
 <p align="center">
   <img width="1860" height="871" alt="Screenshot 2026-05-26 200426" src="https://github.com/user-attachments/assets/68566435-aec0-4673-ad12-34da083d5fa5" />
@@ -59,7 +60,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 </p>
 
 
-###Pay with eSewa
+## Pay with eSewa
 
 <p align="center">
 
@@ -72,13 +73,13 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 </p>
 
 
-###Toggel to your favourite display mode
+## Toggel to your favourite display mode
 <p align="center">
 <img width="796" height="251" alt="Screenshot 2026-05-26 201233" src="https://github.com/user-attachments/assets/34c1c156-fb0e-4561-bd85-0c2833e3ad2c" /> 
 </p>
 ---
 
-## Getting Started
+### Getting Started
 
 ### Prerequisites
 
