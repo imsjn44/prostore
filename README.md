@@ -89,7 +89,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 </p>
 
 ---
-##Admin analytics dashboard
+### Admin analytics dashboard
 <p align="center">
   <img width="1872" height="856" alt="Screenshot 2026-05-26 222014" src="https://github.com/user-attachments/assets/a7ade2ca-d70a-411b-bd3f-31b6d574c1ea" />
 
