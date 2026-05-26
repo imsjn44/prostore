@@ -22,37 +22,44 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 - **Language Composition**: TypeScript (93.7%), JavaScript (3.5%), TailwindCSS (2.8%)
 
 ## Screenshots
-
+---
 ### Homepage
 <p align="center">
   <img width="1871" height="873" alt="Screenshot 2026-05-26 200402" src="https://github.com/user-attachments/assets/697d2951-c9e3-4af7-84f2-6cd71d90eef6" />
 
 </p>
 
+---
 ## Product Catalog
 <p align="center">
   <img width="1860" height="871" alt="Screenshot 2026-05-26 200426" src="https://github.com/user-attachments/assets/68566435-aec0-4673-ad12-34da083d5fa5" />
 
 </p>
 
+---
 ### Shopping Cart
 <p align="center">
   <img width="1900" height="411" alt="Screenshot 2026-05-26 200502" src="https://github.com/user-attachments/assets/3d0b2108-515c-4c42-a7be-b7d219886e01" />
 
 </p>
 
+------
 ### Shipping Address
 
 <p align="center">
-  <img width="1907" height="753" alt="Screenshot 2026-05-26 200517" src="https://github.com/user-attachments/assets/8b9b48f3-9e8c-40c7-b944-af459872ef29" />
+
+  <img width="1877" height="761" alt="Screenshot 2026-05-26 200546" src="https://github.com/user-attachments/assets/2cb74287-d0d4-46e4-b052-9772595fa253" />
+
 </p>
 
+---
 ###  Choose Payment Method
 <p align="center">
   <img width="1915" height="593" alt="Screenshot 2026-05-26 200601" src="https://github.com/user-attachments/assets/6e3f58c9-fd09-4fd8-8386-bf8402c0f3f4" />
 </p>
 
 
+---
 ### Place Order
 <p align="center">
   <img width="1877" height="840" alt="Screenshot 2026-05-26 200635" src="https://github.com/user-attachments/assets/cb2db621-55cd-40b4-bd92-15c6db2aa90b" />
@@ -60,6 +67,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 </p>
 
 
+---
 ## Pay with eSewa
 
 <p align="center">
@@ -73,6 +81,7 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 </p>
 
 
+---
 ## Toggel to your favourite display mode
 <p align="center">
 <img width="796" height="251" alt="Screenshot 2026-05-26 201233" src="https://github.com/user-attachments/assets/34c1c156-fb0e-4561-bd85-0c2833e3ad2c" /> 
