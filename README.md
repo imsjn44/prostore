@@ -18,15 +18,15 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 - **Frontend**: Next.js 14+, React, TypeScript, CSS
 - **Backend**: Next.js API Routes
 - **Database**: PostgreSQL with Prisma ORM
-- **Language Composition**: TypeScript (93.7%), JavaScript (3.5%), CSS (2.8%)
+- **Language Composition**: TypeScript (93.7%), JavaScript (3.5%), TailwindCSS (2.8%)
 
 ## Screenshots
 
-Add your screenshots here to showcase the application:
-
 ### Homepage
-![Homepage](./public/screenshots/homepage.png)
+<p>
+  <img width="1871" height="873" alt="Screenshot 2026-05-26 200402" src="https://github.com/user-attachments/assets/697d2951-c9e3-4af7-84f2-6cd71d90eef6" />
 
+</p>
 ### Product Catalog
 ![Product Catalog](./public/screenshots/product-catalog.png)
 
@@ -64,9 +64,25 @@ npm install
 
 3. Create a `.env.local` file in the root directory and add your environment variables:
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/prostore"
+NEXT_PUBLIC_APP_NAME="Prostore"
+NEXT_PUBLIC_APP_DESCRIPTION="Prostore is a modern e-commerce platform for selling digital products"
+NEXT_PUBLIC_SERVER_URL="http://localhost:3000"
+DATABASE_URL="postgresql://neondb_owner
+LATEST_PRODUCTS_LIMIT="6"
+NEXTAUTH_SECRET=
 NEXTAUTH_URL="http://localhost:3000"
-NEXTAUTH_SECRET="your-secret-key"
+NEXTAUTH_URL_INTERNAL="http://localhost:3000"
+PAYMENT_METHODS="Esewa,Stripe,CashOnDelivery"
+DEFAULT_PAYMENT_METHOD=
+NEXT_PUBLIC_ESEWA_MERCHANT_CODE="EPAYTEST"
+NEXT_PUBLIC_ESEWA_SECRET_KEY="8gBm/:&EnhH.1/q"
+ESEWA_VERIFY_URL="https://rc-epay.esewa.com.np/api/epay/transaction/status/"
+# Not available so Khalti integration stopped here just needed this
+KHALTI_PUBLIC_KEY=
+KHALTI_SECRET_KEY=
+
+UPLOADTHING_TOKEN=
+UPLOADTHING_SECRET=sk_live
 ```
 
 4. Set up the database:
