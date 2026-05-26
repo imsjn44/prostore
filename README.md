@@ -16,8 +16,8 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 
 ## Tech Stack
 
-- **Frontend**: Next.js 14+, React, TypeScript, TailwindCSS
-- **Backend**: Next.js API Routes
+- **Frontend**: Next.js 14+, React, TypeScript, TailwindCSS, ShadCN UI
+- **Backend**: Next.js, UploadThing
 - **Database**: PostgreSQL with Prisma ORM
 - **Language Composition**: TypeScript (93.7%), JavaScript (3.5%), TailwindCSS (2.8%)
 
