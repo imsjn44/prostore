@@ -1,4 +1,4 @@
-# ProStore
+# Prostore
 
 A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, and **TypeScript**.
 
