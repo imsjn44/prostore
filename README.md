@@ -28,16 +28,47 @@ A modern ecommerce store built using **Next.js**, **PostgreSQL**, **Prisma**, an
 
 </p>
 ### Product Catalog
-![Product Catalog](./public/screenshots/product-catalog.png)
+<p>
+  <img width="1860" height="871" alt="Screenshot 2026-05-26 200426" src="https://github.com/user-attachments/assets/68566435-aec0-4673-ad12-34da083d5fa5" />
+
+</p>
 
 ### Shopping Cart
-![Shopping Cart](./public/screenshots/shopping-cart.png)
+<p>
+  <img width="1900" height="411" alt="Screenshot 2026-05-26 200502" src="https://github.com/user-attachments/assets/3d0b2108-515c-4c42-a7be-b7d219886e01" />
 
-### Checkout
-![Checkout](./public/screenshots/checkout.png)
+</p>
 
-### Order Confirmation
-![Order Confirmation](./public/screenshots/order-confirmation.png)
+### Shipping Address
+
+<p>
+  <img width="1907" height="753" alt="Screenshot 2026-05-26 200517" src="https://github.com/user-attachments/assets/8b9b48f3-9e8c-40c7-b944-af459872ef29" />
+</p>
+
+###  Choose Payment Method
+<p>
+  <img width="1915" height="593" alt="Screenshot 2026-05-26 200601" src="https://github.com/user-attachments/assets/6e3f58c9-fd09-4fd8-8386-bf8402c0f3f4" />
+</p>
+
+
+### Place Order
+<p>
+  <img width="1877" height="840" alt="Screenshot 2026-05-26 200635" src="https://github.com/user-attachments/assets/cb2db621-55cd-40b4-bd92-15c6db2aa90b" />
+
+</p>
+
+
+###Pay with eSewa
+
+<p>
+
+<img width="1866" height="853" alt="Screenshot 2026-05-26 200655" src="https://github.com/user-attachments/assets/a2760844-4ff6-41ef-aec5-4c2a18cc4a7e" />
+  <img width="558" height="386" alt="Screenshot 2026-05-26 200706" src="https://github.com/user-attachments/assets/2c6cf3fe-5b81-4faa-9d9c-38ec559f1433" />
+<img width="1868" height="861" alt="Screenshot 2026-05-26 200721" src="https://github.com/user-attachments/assets/cfec9232-d6de-4c7f-a508-17c723fd71fd" />
+<img width="1262" height="687" alt="Screenshot 2026-05-26 200909" src="https://github.com/user-attachments/assets/612826d2-9fa0-4a12-9907-59a2b2892b17" />
+<img width="772" height="570" alt="Screenshot 2026-05-26 200934" src="https://github.com/user-attachments/assets/d26c1f50-4086-4542-a9fa-1d1cc5c31cfc" />
+
+</p>
 
 ---
 
