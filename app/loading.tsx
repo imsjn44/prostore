@@ -12,14 +12,7 @@ const Loading = () => {
         width: "100vw",
       }}
     >
-      <Image
-        loading="eager"
-        src={loader}
-        width={150}
-        height={150}
-        alt="Loading..."
-        className="h-10 w-auto"
-      />
+      <div className="h-10 w-10 animate-spin rounded-full border-4 border-gray-300 border-t-primary" />
     </div>
   );
 };
